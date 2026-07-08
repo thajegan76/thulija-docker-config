@@ -1,0 +1,46 @@
+services:
+
+  dev:
+
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    image: thulija-platform-dev
+
+    container_name: thulija-platform-dev
+
+    volumes:
+      - ../../thulijaplatform:/workspace/thulijaplatform
+
+    working_dir: /workspace/thulijaplatform
+
+    ports:
+      - "4200:4200"
+      - "8888:8888"
+
+    depends_on:
+      - mysql
+
+    stdin_open: true
+    tty: true
+
+  mysql:
+    image: mysql:8.4
+
+    container_name: thulija-platform-mysql
+
+    restart: unless-stopped
+
+    environment:
+      MYSQL_ROOT_PASSWORD: xs2p0rt4l
+      MYSQL_DATABASE: thulijac_coding_studio
+
+    ports:
+      - "3306:3306"
+
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:
