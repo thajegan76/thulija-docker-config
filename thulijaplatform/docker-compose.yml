@@ -10,6 +10,8 @@ services:
 
     container_name: thulija-platform-dev
 
+    hostname: thulija-platform-dev
+
     volumes:
       - ../../thulijaplatform:/workspace/thulijaplatform
 
