@@ -17,7 +17,19 @@ RUN apt-get update && apt-get install -y \
     openjdk-21-jdk \
     maven \
     default-mysql-client \
+    xz-utils \
     && rm -rf /var/lib/apt/lists/*
+
+# s6-overlay
+ARG S6_OVERLAY_VERSION=3.2.3.2
+
+ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-noarch.tar.xz /tmp
+
+RUN tar -C / -Jxpf /tmp/s6-overlay-noarch.tar.xz
+
+ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-x86_64.tar.xz /tmp
+
+RUN tar -C / -Jxpf /tmp/s6-overlay-x86_64.tar.xz
 
 # Node.js 22
 RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
