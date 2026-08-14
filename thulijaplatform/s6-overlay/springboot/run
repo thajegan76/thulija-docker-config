@@ -1,3 +1,8 @@
-#!/command/execlineb -P
+#!/bin/sh
+
+while [ ! -d /workspace/thulijaplatform/tcodegen ]; do
+    sleep 5
+done
+
 cd /workspace/thulijaplatform/tcodegen
-mvn spring-boot:run
+exec mvn spring-boot:run
