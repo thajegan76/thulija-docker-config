@@ -42,4 +42,4 @@ RUN npm install -g @angular/cli
 
 WORKDIR /workspace/thulijaplatform
 
-CMD ["bash"]
+ENTRYPOINT ["/init"]
