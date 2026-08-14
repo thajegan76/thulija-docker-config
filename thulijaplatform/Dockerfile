@@ -40,6 +40,11 @@ RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
 # Angular CLI
 RUN npm install -g @angular/cli
 
+# s6-overlay service definitions
+COPY s6-overlay/angular /etc/s6-overlay/s6-rc.d/angular
+COPY s6-overlay/springboot /etc/s6-overlay/s6-rc.d/springboot
+COPY s6-overlay/user /etc/s6-overlay/user-bundles.d/user
+
 WORKDIR /workspace/thulijaplatform
 
 ENTRYPOINT ["/init"]
