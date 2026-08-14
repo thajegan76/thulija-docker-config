@@ -1,3 +1,8 @@
-#!/command/execlineb -P
+#!/bin/sh
+
+while [ ! -d /workspace/thulijaplatform/tcodegen/studio ]; do
+    sleep 5
+done
+
 cd /workspace/thulijaplatform/tcodegen/studio
-ng serve --host 0.0.0.0
+exec ng serve --host 0.0.0.0
