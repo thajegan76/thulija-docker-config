@@ -20,6 +20,7 @@ services:
     ports:
       - "4200:4200"
       - "8888:8888"
+      - "5005:5005"
 
     depends_on:
       - mysql
