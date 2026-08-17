@@ -5,4 +5,5 @@ while [ ! -d /workspace/thulijaplatform/tcodegen ]; do
 done
 
 cd /workspace/thulijaplatform/tcodegen
-exec mvn spring-boot:run
+exec mvn spring-boot:run \
+    -Dspring-boot.run.jvmArguments="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
