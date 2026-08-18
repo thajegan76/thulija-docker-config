@@ -8,14 +8,6 @@ done
 
 cd "$STUDIO_DIR"
 
-while ! command -v node >/dev/null 2>&1; do
-    sleep 5
-done
-
-while ! command -v npm >/dev/null 2>&1; do
-    sleep 5
-done
-
 if [ ! -d "node_modules" ]; then
     npm install
 fi
