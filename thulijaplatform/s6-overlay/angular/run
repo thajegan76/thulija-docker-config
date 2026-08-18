@@ -1,8 +1,23 @@
 #!/bin/sh
 
-while [ ! -d /workspace/thulijaplatform/tcodegen/studio ]; do
+STUDIO_DIR=/workspace/thulijaplatform/tcodegen/studio
+
+while [ ! -d "$STUDIO_DIR" ]; do
     sleep 5
 done
 
-cd /workspace/thulijaplatform/tcodegen/studio
+cd "$STUDIO_DIR"
+
+while ! command -v node >/dev/null 2>&1; do
+    sleep 5
+done
+
+while ! command -v npm >/dev/null 2>&1; do
+    sleep 5
+done
+
+if [ ! -d "node_modules" ]; then
+    npm install
+fi
+
 exec ng serve --host 0.0.0.0
