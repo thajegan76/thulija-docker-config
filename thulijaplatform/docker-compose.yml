@@ -1,7 +1,6 @@
 services:
 
   dev:
-
     build:
       context: .
       dockerfile: Dockerfile
@@ -9,7 +8,6 @@ services:
     image: thulija-platform-dev
 
     container_name: thulija-platform-dev
-
     hostname: thulija-platform-dev
 
     volumes:
@@ -23,7 +21,8 @@ services:
       - "5005:5005"
 
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
 
     stdin_open: true
     tty: true
@@ -32,6 +31,7 @@ services:
     image: mysql:8.4
 
     container_name: thulija-platform-mysql
+    hostname: thulija-platform-mysql
 
     restart: unless-stopped
 
@@ -44,6 +44,23 @@ services:
 
     volumes:
       - mysql-data:/var/lib/mysql
+      - ../../thulijaplatform/tcodegen/database/tcodegen.sql:/docker-entrypoint-initdb.d/tcodegen.sql:ro
+
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "localhost",
+          "-uroot",
+          "-p$$MYSQL_ROOT_PASSWORD"
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 10s
 
 volumes:
   mysql-data:
